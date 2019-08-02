@@ -1,3 +1,11 @@
+//constants 
+const CUSTOMERAPI = 'http://http://localhost:3000/api/v1/customers'
+//fetches 
+const getCustomers = () => {
+    fetch(CUSTOMERAPI)
+    .then(resp =>  resp.json())
+}
+
 const formDiv = () => {
     const fDiv = document.createElement('form')
     const bodyDiv = document.querySelector('body')
