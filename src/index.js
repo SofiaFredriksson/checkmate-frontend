@@ -1,5 +1,5 @@
 //constants 
-const CUSTOMERAPI = 'http://http://localhost:3000/api/v1/customers'
+const CUSTOMERAPI = 'http://localhost:3000/api/v1/customers'
 const customerForm = document.querySelector('.add-customer-form')
 const containerDiv = document.querySelector('.container')
 
@@ -7,7 +7,7 @@ const containerDiv = document.querySelector('.container')
 let state = {
     customer: {
         name: '',
-        customerPrice: 0.0
+        due: 0.0
     },
     bill: {
         restaurantName: '',
@@ -19,11 +19,15 @@ let state = {
 
 const displayCust = () => {
    containerDiv.innerHTML = `
-   <h1>${state.bill.restaurantName}</h1> 
-   <h1>${state.customer.name}</h1>
-   <h1>${state.customer.customerPrice}</h1>
+   <div class="result-card">
+   <h1>Thanks ${state.customer.name}</h1>
+   <h1>Hope you enjoyed  your meal at ${state.bill.restaurantName}</h1> 
+   <h1>You owe ${Number((state.customer.due).toFixed(1))} each</h1>
+   </div>
     `
 }
+
+
 
 //eventlisteners
 const submitFormEventListener = () => {
@@ -37,10 +41,11 @@ const submitFormEventListener = () => {
         state.bill.serviceCharge = customerForm.service.value
         state.bill.serviceCharge === 0 
         ? 
-        state.customer.customerPrice = (state.bill.total / state.guests) 
+        state.customer.due = (state.bill.total / state.guests) 
         : 
-        state.customer.customerPrice = (parseFloat(state.bill.total) + (state.bill.total * (state.bill.serviceCharge / 100))) / state.guests
+        state.customer.due = (parseFloat(state.bill.total) + (state.bill.total * (state.bill.serviceCharge / 100))) / state.guests
         displayCust()
+        createCustomer(state.customer)
     })
 
 }
@@ -51,10 +56,10 @@ const getCustomers = () => {
 }
 
 const createCustomer = (customer) => {
-    fetch(CUSTOMERAPI, {
+    return fetch(CUSTOMERAPI, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({name: customer})
+      body: JSON.stringify(customer)
     })
 
 }
