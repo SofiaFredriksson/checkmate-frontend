@@ -6,7 +6,8 @@ const containerDiv = document.querySelector('.container')
 //state
 let state = {
     customer: {
-        name: ''
+        name: '',
+        customerPrice: 0.0
     },
     bill: {
         restaurantName: '',
@@ -17,8 +18,11 @@ let state = {
 }
 
 const displayCust = () => {
-   containerDiv.innerHTML = `<h1>${state.bill.restaurantName}</h1> <h1>${state.customer.name}</h1><h1>${state.bill.serviceCharge === 0 ? (state.bill.total / state.guests) : (parseFloat(state.bill.total) + (state.bill.total * (state.bill.serviceCharge / 100))) / state.guests}</h1>`
-
+   containerDiv.innerHTML = `
+   <h1>${state.bill.restaurantName}</h1> 
+   <h1>${state.customer.name}</h1>
+   <h1>${state.customer.customerPrice}</h1>
+    `
 }
 
 //eventlisteners
@@ -31,6 +35,11 @@ const submitFormEventListener = () => {
         state.bill.total = customerForm.total.value
         state.guests = customerForm.guests.value
         state.bill.serviceCharge = customerForm.service.value
+        state.bill.serviceCharge === 0 
+        ? 
+        state.customer.customerPrice = (state.bill.total / state.guests) 
+        : 
+        state.customer.customerPrice = (parseFloat(state.bill.total) + (state.bill.total * (state.bill.serviceCharge / 100))) / state.guests
         displayCust()
     })
 
