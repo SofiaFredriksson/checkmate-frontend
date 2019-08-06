@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab:700|Poiret+One&display=swap');
+
 body {
     background-image: url("bg-body-img.jpg");
   background-size: cover;
+  font-family: 'Josefin Slab', serif;
 }
 
 .container {
@@ -10,12 +13,14 @@ body {
 
 .result-card{
     background-color: #eeeeee;
-    height: 250px;
-    width: 300px;
-    box-shadow: 10px 10px grey;
+    height: auto;
+    width: auto;
     padding: 10px;
     border-radius: 10px;
     margin: auto;
+    box-shadow: 0px 0px 25px 5px black;
+    background-image: url("bg-image.jpg");
+    background-size: cover;
 }
 
 .add-customer-form {
@@ -28,6 +33,7 @@ body {
     margin: auto;
     padding: 5px;
     box-shadow: 0px 0px 25px 5px black;
+    border-radius: 10px;
 }
 
 input {

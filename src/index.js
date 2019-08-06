@@ -20,9 +20,9 @@ let state = {
 const displayCust = () => {
    containerDiv.innerHTML = `
    <div class="result-card">
-   <h1>Thanks ${state.customer.name}</h1>
-   <h1>Hope you enjoyed  your meal at ${state.bill.restaurantName}</h1> 
-   <h1>You owe ${Number((state.customer.due).toFixed(1))} each</h1>
+   <p>Thanks ${state.customer.name}</p>
+   <p>Hope you enjoyed  your meal at ${state.bill.restaurantName}</p> 
+   <p>You owe ${Number((state.customer.due).toFixed(1))} each</p>
    </div>
     `
 }
