@@ -27,7 +27,13 @@ const displayCust = () => {
     `
 }
 
-
+// const displayBills = (bills) => {
+//     const billDiv = document.createElement('div')
+//     billDiv.innerHTML = `
+//     <h1>${state.bill.restaurantName}</h1>
+//     <p>Total: ${state.total}</p>
+//     `
+// }
 
 //eventlisteners
 const submitFormEventListener = () => {
@@ -51,7 +57,7 @@ const submitFormEventListener = () => {
 }
 //fetches 
 const getCustomers = () => {
-    fetch(CUSTOMERAPI)
+    return fetch(CUSTOMERAPI)
     .then(resp =>  resp.json())
 }
 
@@ -66,6 +72,7 @@ const createCustomer = (customer) => {
 
 const initialize = () => {
     submitFormEventListener()
+
 }
 
 initialize()

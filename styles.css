@@ -48,8 +48,8 @@ input {
   
   input[type=submit] {
     width: 100%;
-    background-color: #4CAF50;
-    color: white;
+    background-color: pink;
+    color: black;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -58,5 +58,5 @@ input {
   }
   
   input[type=submit]:hover {
-    background-color: #45a049;
+    background-color: rgb(250, 215, 221);
   }
