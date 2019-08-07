@@ -19,22 +19,22 @@ let state = {
     guests: 1,
 }
 
+//displays
+
 const displayCust = () => {
    containerDiv.innerHTML = `
    <div class="result-card">
    <p>Thanks ${state.customer.name}</p>
    <p>Hope you enjoyed  your meal at ${state.bill.restaurantName}</p> 
    <p>You owe ${Number((state.customer.due).toFixed(1))} each</p>
+   <button class="back-btn">Another One</button>
+   <button class="all-btn">See all bills</button>
    </div>
     `
 }
 
-// const displayBills = (bills) => {
-//     const billDiv = document.createElement('div')
-//     billDiv.innerHTML = `
-//     <h1>${state.bill.restaurantName}</h1>
-//     <p>Total: ${state.total}</p>
-//     `
+// const displayBills = () => {
+
 // }
 
 //eventlisteners
@@ -82,22 +82,8 @@ const getCustomers = () => {
     .then(resp =>  resp.json())
 }
 
-// const createCustomer = (customer) => {
-//     return fetch(CUSTOMERAPI, {
-//       method: 'POST',
-//       headers: {'Content-Type': 'application/json'},
-//       body: JSON.stringify(customer)
-//     })
-// }
 
-// const createBill = (bill) => {
-//     return fetch(BILLAPI, {
-//         method: 'POST',
-//         headers: {'Content-Type': 'application/json'},
-//         body: JSON.stringify(bill)
-//     }).then(resp => resp.json())
-// }
-
+//initialize
 const initialize = () => {
     submitFormEventListener()
 
