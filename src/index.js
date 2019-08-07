@@ -2,12 +2,14 @@
 const CUSTOMERAPI = 'http://localhost:3000/api/v1/customers'
 const customerForm = document.querySelector('.add-customer-form')
 const containerDiv = document.querySelector('.container')
+const BILLAPI = 'http://localhost:3000/api/v1/bills'
 
 //state
 let state = {
     customer: {
         name: '',
-        due: 0.0
+        due: 0.0,
+        bill_id: 0
     },
     bill: {
         restaurantName: '',
@@ -50,25 +52,51 @@ const submitFormEventListener = () => {
         state.customer.due = (state.bill.total / state.guests) 
         : 
         state.customer.due = (parseFloat(state.bill.total) + (state.bill.total * (state.bill.serviceCharge / 100))) / state.guests
-        displayCust()
-        createCustomer(state.customer)
-    })
 
+        displayCust()
+
+        fetch(BILLAPI, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                restaurant_name: state.bill.restaurantName,
+                total_price: state.bill.total,
+                service_charge: state.bill.serviceCharge
+            })
+        }).then(resp => resp.json())
+        .then(bill => fetch(CUSTOMERAPI, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                name: state.customer.name,
+                due: state.customer.due,
+                bill_id: bill.id
+            })
+        }))
+    })  
 }
+
 //fetches 
 const getCustomers = () => {
     return fetch(CUSTOMERAPI)
     .then(resp =>  resp.json())
 }
 
-const createCustomer = (customer) => {
-    return fetch(CUSTOMERAPI, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(customer)
-    })
+// const createCustomer = (customer) => {
+//     return fetch(CUSTOMERAPI, {
+//       method: 'POST',
+//       headers: {'Content-Type': 'application/json'},
+//       body: JSON.stringify(customer)
+//     })
+// }
 
-}
+// const createBill = (bill) => {
+//     return fetch(BILLAPI, {
+//         method: 'POST',
+//         headers: {'Content-Type': 'application/json'},
+//         body: JSON.stringify(bill)
+//     }).then(resp => resp.json())
+// }
 
 const initialize = () => {
     submitFormEventListener()
