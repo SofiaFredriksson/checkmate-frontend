@@ -9,6 +9,7 @@ body {
 .container {
     max-width: 500px;
   margin: auto;
+  /* display: inline-flex; */
 }
 
 .result-card{
@@ -60,4 +61,21 @@ input {
   
   input[type=submit]:hover {
     background-color: rgb(250, 215, 221);
+  }
+
+  .bill-card {
+    width: 200px;
+    height: auto;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.7);
+  }
+
+  .all-bill-div {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
   }

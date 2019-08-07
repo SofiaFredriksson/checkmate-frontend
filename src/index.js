@@ -4,6 +4,9 @@ const customerForm = document.querySelector('.add-customer-form')
 const containerDiv = document.querySelector('.container')
 const BILLAPI = 'http://localhost:3000/api/v1/bills'
 
+const allBillDiv = document.createElement('div')
+    allBillDiv.classList.add('all-bill-div')
+
 //state
 let state = {
     customer: {
@@ -37,18 +40,20 @@ const displayCust = () => {
 
 const displayBill = (bill) => {
     const billCard = document.createElement('div')
-    billCard.classList.add = 'bill-card'
+    billCard.classList.add('bill-card')
     billCard.innerHTML = `
     <p>Bill for: ${bill.restaurant_name}</p>
     <p>Total: ${bill.total_price}</p>
     <p>Service charge: ${bill.service_charge}</p>
+    <p>Due each: ${Number((bill.customer.due).toFixed(1))}</p>
     `
-    containerDiv.appendChild(billCard)
+    allBillDiv.appendChild(billCard)
 }
 
 const displayAllBills = (bills) => {
-    containerDiv.innerHTML = ''
+    containerDiv.innerHTML = ''    
     bills.forEach(displayBill)
+    containerDiv.appendChild(allBillDiv)
 }
 
 //eventlisteners
@@ -113,8 +118,6 @@ const getBills = () => {
 //initialize
 const initialize = () => {
     submitFormEventListener()
-
-
 }
 
 initialize()
