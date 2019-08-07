@@ -31,13 +31,40 @@ const displayCust = () => {
    <button class="all-btn">See all bills</button>
    </div>
     `
+    backBtnListener()
+    allBtnListener()
 }
 
-// const displayBills = () => {
+const displayBill = (bill) => {
+    const billCard = document.createElement('div')
+    billCard.classList.add = 'bill-card'
+    billCard.innerHTML = `
+    <p>Bill for: ${bill.restaurant_name}</p>
+    <p>Total: ${bill.total_price}</p>
+    <p>Service charge: ${bill.service_charge}</p>
+    `
+    containerDiv.appendChild(billCard)
+}
 
-// }
+const displayAllBills = (bills) => {
+    containerDiv.innerHTML = ''
+    bills.forEach(displayBill)
+}
 
 //eventlisteners
+const backBtnListener = () => {
+   const backBtn = document.querySelector('.back-btn')
+    backBtn.addEventListener('click', () => {
+        location.reload(true)
+    })
+}
+
+const allBtnListener = () => {
+    const backBtn = document.querySelector('.all-btn')
+     backBtn.addEventListener('click', () => {
+         getBills().then(displayAllBills)
+     })
+ }
 const submitFormEventListener = () => {
     customerForm.addEventListener('submit', event  => {
         event.preventDefault()
@@ -54,7 +81,7 @@ const submitFormEventListener = () => {
         state.customer.due = (parseFloat(state.bill.total) + (state.bill.total * (state.bill.serviceCharge / 100))) / state.guests
 
         displayCust()
-
+        
         fetch(BILLAPI, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -77,15 +104,16 @@ const submitFormEventListener = () => {
 }
 
 //fetches 
-const getCustomers = () => {
-    return fetch(CUSTOMERAPI)
-    .then(resp =>  resp.json())
+const getBills = () => {
+    return fetch(BILLAPI)
+    .then(resp => resp.json())
 }
 
 
 //initialize
 const initialize = () => {
     submitFormEventListener()
+
 
 }
 
